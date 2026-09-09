@@ -1,0 +1,12 @@
+{% extends 'admin/change_form.html' %}
+
+
+{% block submit_buttons_bottom %}
+  {{ block.super }}
+
+  <div class="submit-row">
+    <input type="submit" value="SAVE UPPERCASE" name="_saveupper">
+    <a href="{% url 'admin:accounts_user_changelist' %}" class="deletelink" style="text-decoration:none;">Cancel</a>
+  </div>
+
+{% endblock %}

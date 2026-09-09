@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+
+{% block content %}
+    <h2>{{ product.name }}</h2>
+    <small>{{ product.created|timesince_fa }}</small>
+    <p>{{ product.price|divide_thousand }} هزار تومان</p>
+    <img src="{{ product.image.url }}" style="width:300px;">
+    <p>{{ product.description|safe }}</p><br/><br/>
+
+    <form action="{% url 'orders:cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="add to cart">
+    </form>
+{% endblock %}

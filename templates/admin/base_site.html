@@ -1,0 +1,8 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block branding %}
+  <div id="site-name">
+    <a href="{% url 'admin:index' %}"><img src="{% static 'mongard.png' %}" width="40px"></a>
+  </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load extra_tags %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Last modified</th>
+                <th>Download</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in objects %}
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <th>{{ obj.Key }}</th>
+                    <th>{{ obj.Size|filesizeformat }}</th>
+                    <th>{% convert_to_shamsi obj.LastModified %}</th>
+                    <th><a href="{% url 'home:download_obj_bucket' obj.Key %}">download</a></th>
+                    <th><a href="{% url 'home:delete_obj_bucket' obj.Key %}">delete</a></th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
