@@ -1,3 +1,129 @@
 home.views INFO 2026-09-09 17:39:34,528 views Home activated
 home.views INFO 2026-09-09 17:39:51,932 views Home activated
 home.views INFO 2026-09-09 17:39:56,323 views Home activated
+django.utils.autoreload INFO 2026-09-09 17:53:03,915 autoreload C:\Users\pc_parsian\Desktop\shop\accounts\admin.py changed, reloading.
+django.utils.autoreload INFO 2026-09-09 17:53:04,942 autoreload Watching for file changes with StatReloader
+django.utils.autoreload INFO 2026-09-09 18:09:38,914 autoreload Watching for file changes with StatReloader
+home.views INFO 2026-09-09 18:09:41,201 views Home activated
+django.request ERROR 2026-09-09 18:09:53,754 log Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\contrib\sessions\backends\base.py", line 249, in _get_session
+    return self._session_cache
+           ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'SessionStore' object has no attribute '_session_cache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1055, in connect_check_health
+    sock = self._connect()
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1617, in _connect
+    raise err
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1601, in _connect
+    sock.connect(socket_address)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\core\handlers\exception.py", line 56, in inner
+    response = get_response(request)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\core\handlers\base.py", line 199, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\pc_parsian\Desktop\shop\home\views.py", line 16, in get
+    return render(request,'home/index.html',{'products':products,'categories':categories})
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\shortcuts.py", line 27, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    with context.bind_template(self):
+         ~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Program Files\Python313\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\template\context.py", line 263, in bind_template
+    context = processor(self.request)
+  File "C:\Users\pc_parsian\Desktop\shop\orders\context_processor.py", line 5, in cart
+    return {'cart':Cart(request)}
+                   ~~~~^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\shop\orders\cart.py", line 7, in __init__
+    cart=self.session.get(CART_SESSION_ID,None)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\contrib\sessions\backends\base.py", line 77, in get
+    return self._session.get(key, default)
+           ^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\contrib\sessions\backends\base.py", line 254, in _get_session
+    self._session_cache = self.load()
+                          ~~~~~~~~~^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\contrib\sessions\backends\cached_db.py", line 46, in load
+    self._cache.set(
+    ~~~~~~~~~~~~~~~^
+        self.cache_key, data, self.get_expiry_age(expiry=s.expire_date)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 205, in set
+    self._cache.set(key, value, self.get_backend_timeout(timeout))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\django\core\cache\backends\redis.py", line 122, in set
+    client.set(key, value, ex=timeout)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\utils.py", line 523, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\commands\core.py", line 4457, in set
+    return self.execute_command("SET", *pieces, **options)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\client.py", line 867, in execute_command
+    return self._execute_command(*args, **options)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\client.py", line 873, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\utils.py", line 258, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 3273, in get_connection
+    connection.connect()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1028, in connect
+    self.retry.call_with_retry(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        lambda: self.connect_check_health(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        lambda error: self.disconnect(error),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\retry.py", line 132, in call_with_retry
+    raise error
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\retry.py", line 120, in call_with_retry
+    return do()
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1029, in <lambda>
+    lambda: self.connect_check_health(
+            ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        check_health=True, retry_socket_connect=False
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "C:\Users\pc_parsian\Desktop\Shop\.venv\Lib\site-packages\redis\connection.py", line 1077, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. No connection could be made because the target machine actively refused it.
+django.utils.autoreload INFO 2026-09-09 18:11:01,123 autoreload C:\Users\pc_parsian\Desktop\shop\shop\settings.py changed, reloading.
+django.utils.autoreload INFO 2026-09-09 18:11:02,231 autoreload Watching for file changes with StatReloader
+home.views INFO 2026-09-09 18:11:05,097 views Home activated
+home.views INFO 2026-09-09 18:11:09,669 views Home activated
+home.views INFO 2026-09-09 18:11:10,568 views Home activated
+home.views INFO 2026-09-09 18:11:11,106 views Home activated
+home.views INFO 2026-09-09 18:11:15,157 views Home activated
+home.views INFO 2026-09-09 18:11:16,242 views Home activated
+home.views INFO 2026-09-09 18:12:28,329 views Home activated
+home.views INFO 2026-09-09 18:12:38,243 views Home activated

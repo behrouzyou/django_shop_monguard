@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import *
 from .forms import *
 from django.shortcuts import redirect
+from django.utils.safestring import mark_safe
 
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
@@ -36,16 +37,15 @@ class UserAdmin(BaseUserAdmin):
 
 
 
-# @admin.register(Avatar)
-# class AvatarAdmin(admin.ModelAdmin):
-#     readonly_fields = ["avatar_pic"]
-#
-#     def avatar_pic(self, obj):
-#         return mark_safe(f"<img src='{obj.picture.url}' width='{obj.picture.width}' />")
+@admin.register(Avatar)
+class AvatarAdmin(admin.ModelAdmin):
+    readonly_fields = ["avatar_pic"]
+
+    def avatar_pic(self, obj):
+        return mark_safe(f"<img src='{obj.picture.url}' width='{obj.picture.width}' />")
 
 admin.site.register(User,UserAdmin)
 
 @admin.register(OtpCode)
 class OtpCodeAdmin(admin.ModelAdmin):
     list_display =('phone_number','code','created')
-admin.site.register(Avatar)
