@@ -171,3 +171,46 @@ EMAIL_HOST_USER = 'behrouzyou@gmail.com'
 EMAIL_HOST_PASSWORD = 'bpycygcfvfwtsvfv'
 DEFAULT_FROM_EMAIL = 'behrouzyou@gmail.com'
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format":"{name} {levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{"
+        }
+    },
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "logs/general.log",
+            "level": "DEBUG",
+            "formatter": "verbose",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+        "file_rotate": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": "logs/app.log",
+            "maxBytes": 10 * 1024 * 1024,
+            "backupCount": 30,
+        },
+    },
+    "loggers": {
+        "": {
+            "level": "DEBUG",
+            "handlers": ["file"],
+        },
+        "accounts": {
+            "level": "INFO",
+            "handlers": ["file"],
+            "propagate": False,
+        },
+    }
+}
