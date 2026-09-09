@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User
+from .models import *
 from django.core.exceptions import ValidationError
+from .validators import *
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label= 'password',widget=forms.PasswordInput)
@@ -55,3 +56,16 @@ class VerifyCodeForm(forms.Form):
 class UserLoginForm(forms.Form):
     phone=forms.CharField()
     password = forms.CharField(widget= forms.PasswordInput)
+
+class UserAvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["picture"]
+
+    def clean_picture(self):
+        avatar = self.cleaned_data.get('picture')
+        if not avatar:
+            raise ValidationError("please select an image")
+
+        validate_avatar(avatar)
+        return process_image(avatar)

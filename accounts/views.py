@@ -1,14 +1,14 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import message
+from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views import View
-
+from django.contrib.auth import views as auth_views
 from utils import send_otp_code
-from .forms import UserRegistrationForm, VerifyCodeForm, UserLoginForm
+from .forms import *
 import random
-from .models import OtpCode, User
+from .models import *
 
 
 class UserRegisterView(View):
@@ -63,11 +63,12 @@ class UserLogoutView(LoginRequiredMixin,View):
 
 class UserLoginView(View):
     form_class= UserLoginForm
+    template_name = "accounts/login.html"
     def get(self,request):
         form =self.form_class
         return render(request,'accounts/login.html',{'form':form})
     def post(self,request):
-        form=self.form_class
+        form=self.form_class(request.POST)
         if form.is_valid():
             cd=form.cleaned_data
             user = authenticate(request,phone_number =cd['phone'],password =cd['password'])
@@ -77,3 +78,39 @@ class UserLoginView(View):
                 return redirect('home:home')
             messages.error(request,'phone or password is wrong','danger')
         return render(request,'accounts/login.html',{'form':form})
+
+
+class UserPasswordResetView(auth_views.PasswordResetView):
+    template_name = "accounts/password_reset_form.html"
+    success_url = reverse_lazy("accounts:password_reset_done")
+    email_template_name = "accounts/password_reset_email.html"
+
+
+class UserPasswordResetDoneView(auth_views.PasswordResetDoneView):
+    template_name = "accounts/password_reset_done.html"
+
+
+class UserPasswordConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = "accounts/password_reset_confirm.html"
+    success_url = reverse_lazy("accounts:password_reset_complete")
+
+
+class UserPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    template_name = "accounts/password_reset_complete.html"
+
+
+class UserUploadAvatarView(LoginRequiredMixin, View):
+    form_class = UserAvatarForm
+
+    def get(self, request):
+        return render(request, "accounts/avatar.html", {'form':self.form_class})
+
+    def post(self, request):
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            a = form.save(commit=False)
+            a.user = request.user
+            a.save()
+            messages.success(request, "Avatar saved", "success")
+            return redirect("home:home")
+        return render(request, "accounts/avatar.html", {'form':form})
