@@ -3,7 +3,7 @@
 A Django e-commerce project with separate apps for products, categories, accounts, orders, and the shop homepage. The URL configuration also includes a product sitemap endpoint.
 
 ## Features visible in the code
-- Product detail views based on product slugs
+- Product detail views based on slugs
 - Product and category apps
 - Account and order areas
 - Shopping-cart form integration in product detail
@@ -11,23 +11,14 @@ A Django e-commerce project with separate apps for products, categories, account
 - XML sitemap for products
 - Media-file serving in development
 
-## Tech stack
+## Stack
 - Python and Django
 - Django templates
-- SQLite database currently present in the repository
 - CKEditor
 - Django sitemap framework
 
 ## Run locally
-Requires Python and pip.
-
-```bash
-git clone https://github.com/behrouzyou/django_shop_monguard.git
-cd django_shop_monguard
-python -m venv .venv
-```
-
-Activate the virtual environment and install the project's dependencies. Configure a development secret key and allowed hosts, then run:
+Create and activate a Python virtual environment, install project dependencies, configure a private development secret key, and run:
 
 ```bash
 python manage.py migrate
